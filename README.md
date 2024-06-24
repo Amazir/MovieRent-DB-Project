@@ -22,12 +22,34 @@ Poniżej znajduje się szczegółowy opis każdej z tabel.
 •	release_date (date): Data premiery filmu.
 •	number_of_copies (int): Liczba kopii dostępnych w wypożyczalni.
 
+```sql
+CREATE TABLE movies (
+    movie_id int  NOT NULL,
+    title varchar(255)  NOT NULL,
+    genre varchar(50)  NOT NULL,
+    release_date date  NOT NULL,
+    number_of_copies int  NOT NULL,
+    CONSTRAINT movies_pk PRIMARY KEY  (movie_id)
+);
+```
+
 ##### TABELA: KLIENCI
 •	client_id (int, PK): Unikalny identyfikator klienta.
 •	first_name (varchar(100)): Imię klienta.
 •	last_name (varchar(100)): Nazwisko klienta.
 •	email (varchar(255)): Adres e-mail klienta.
 •	phone_number (varchar(20)): Numer telefonu klienta.
+
+```sql
+CREATE TABLE clients (
+    client_id int  NOT NULL,
+    first_name varchar(100)  NOT NULL,
+    last_name varchar(100)  NOT NULL,
+    email varchar(255)  NOT NULL,
+    phone_number varchar(20)  NOT NULL,
+    CONSTRAINT clients_pk PRIMARY KEY  (client_id)
+);
+```
 
 ##### TABELA: WYPOŻYCZENIA
 •	rental_id (int, PK): Unikalny identyfikator wypożyczenia.
@@ -36,6 +58,28 @@ Poniżej znajduje się szczegółowy opis każdej z tabel.
 •	rent_date (date): Data wypożyczenia.
 •	return_date (date): Data zwrotu.
 
+```sql
+CREATE TABLE rentals (
+    rental_id int  NOT NULL,
+    client_id int  NOT NULL,
+    movie_id int  NOT NULL,
+    rent_date date  NOT NULL,
+    return_date date  NOT NULL,
+    CONSTRAINT rentals_pk PRIMARY KEY  (rental_id)
+);
+```
+
+```sql
+-- Klucze obce
+ALTER TABLE rentals ADD CONSTRAINT rentals_clients
+    FOREIGN KEY (client_id)
+    REFERENCES clients (client_id);
+
+ALTER TABLE rentals ADD CONSTRAINT rentals_movies
+    FOREIGN KEY (movie_id)
+    REFERENCES movies (movie_id);
+```
+
 ##### TABELA: HISTORIA
 •	history_id (int, PK): Unikalny identyfikator historii.
 •	client_id (int, FK): Identyfikator klienta (klucz obcy, referencja do tabeli Klienci).
@@ -43,12 +87,56 @@ Poniżej znajduje się szczegółowy opis każdej z tabel.
 •	rent_date (date): Data wypożyczenia.
 •	return_date (date): Data zwrotu.
 
+```sql
+CREATE TABLE history (
+    history_id int  NOT NULL,
+    client_id int  NOT NULL,
+    movie_id int  NOT NULL,
+    rent_date date  NOT NULL,
+    return_date date  NOT NULL,
+    CONSTRAINT history_pk PRIMARY KEY  (history_id)
+);
+```
+
+```sql
+-- Klucze obce
+ALTER TABLE history ADD CONSTRAINT history_clients
+    FOREIGN KEY (client_id)
+    REFERENCES clients (client_id);
+
+ALTER TABLE history ADD CONSTRAINT history_movies
+    FOREIGN KEY (movie_id)
+    REFERENCES movies (movie_id);
+```
+
 ##### TABELA: OPINIE
 •	opinion_id (int, PK): Unikalny identyfikator opinii.
 •	client_id (int, FK): Identyfikator klienta (klucz obcy, referencja do tabeli Klienci).
 •	movie_id (int, FK): Identyfikator filmu (klucz obcy, referencja do tabeli Filmy).
 •	rate (int): Ocena filmu (np. w skali od 1 do 10).
 •	comment (text): Komentarz użytkownika dotyczący filmu.
+
+```sql
+CREATE TABLE opinions (
+    opinion_id int  NOT NULL,
+    client_id int  NOT NULL,
+    movie_id int  NOT NULL,
+    rate int  NOT NULL,
+    comment text  NOT NULL,
+    CONSTRAINT opinions_pk PRIMARY KEY  (opinion_id)
+);
+```
+
+```sql
+-- Klucze obce
+ALTER TABLE opinions ADD CONSTRAINT opinions_clients
+    FOREIGN KEY (client_id)
+    REFERENCES clients (client_id);
+
+ALTER TABLE opinions ADD CONSTRAINT opinions_movies
+    FOREIGN KEY (movie_id)
+    REFERENCES movies (movie_id);
+```
 
 #### 4. RELACJE MIĘDZY TABELAMI
 •	Filmy i Klienci mają relacje z tabelą Wypożyczenia oraz Historia poprzez klucze obce movie_id i client_id.
@@ -175,3 +263,47 @@ Opis: Zapewnia, że każda wartość client_id w tabeli opinions odpowiada istni
 2. Klucz obcy: movie_id
 Referencja do: movies.movie_id
 Opis: Zapewnia, że każda wartość movie_id w tabeli opinions odpowiada istniejącemu movie_id w tabeli movies.
+
+#### 6. Kod SQL do wprowadzenia przykładowych danych
+```sql
+--- Tabela 'movies'
+INSERT INTO movies (movie_id, title, genre, release_date, number_of_copies) VALUES
+(1, 'The Shawshank Redemption', 'Drama', '1994-09-23', 5),
+(2, 'The Godfather', 'Crime', '1972-03-24', 3),
+(3, 'The Dark Knight', 'Action', '2008-07-18', 4),
+(4, 'Pulp Fiction', 'Crime', '1994-10-14', 2),
+(5, 'The Lord of the Rings: The Return of the King', 'Fantasy', '2003-12-17', 6);
+
+--- Tabela 'clients'
+INSERT INTO clients (client_id, first_name, last_name, email, phone_number) VALUES
+(1, 'John', 'Doe', 'john.doe@example.com', '123-456-7890'),
+(2, 'Jane', 'Smith', 'jane.smith@example.com', '234-567-8901'),
+(3, 'Robert', 'Johnson', 'robert.johnson@example.com', '345-678-9012'),
+(4, 'Michael', 'Williams', 'michael.williams@example.com', '456-789-0123'),
+(5, 'Mary', 'Brown', 'mary.brown@example.com', '567-890-1234');
+
+--- Tabela 'rentals'
+INSERT INTO rentals (rental_id, client_id, movie_id, rent_date, return_date) VALUES
+(1, 1, 1, '2024-06-01', '2024-06-10'),
+(2, 2, 2, '2024-06-03', '2024-06-12'),
+(3, 3, 3, '2024-06-05', '2024-06-14'),
+(4, 4, 4, '2024-06-07', '2024-06-16'),
+(5, 5, 5, '2024-06-09', '2024-06-18');
+
+--- Tabela 'history'
+INSERT INTO history (history_id, client_id, movie_id, rent_date, return_date) VALUES
+(1, 1, 1, '2024-05-01', '2024-05-10'),
+(2, 2, 2, '2024-05-03', '2024-05-12'),
+(3, 3, 3, '2024-05-05', '2024-05-14'),
+(4, 4, 4, '2024-05-07', '2024-05-16'),
+(5, 5, 5, '2024-05-09', '2024-05-18');
+
+--- Tablea 'opinions'
+INSERT INTO opinions (opinion_id, client_id, movie_id, rate, comment) VALUES
+(1, 1, 1, 5, 'Amazing movie, highly recommend!'),
+(2, 2, 2, 4, 'Great film, a classic.'),
+(3, 3, 3, 5, 'One of the best action movies ever.'),
+(4, 4, 4, 3, 'Good movie but not my favorite.'),
+(5, 5, 5, 5, 'Epic conclusion to the trilogy.');
+```
+
