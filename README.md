@@ -97,52 +97,52 @@ System będzie obsługiwał rezerwacje filmów poprzez wprowadzenie mechanizmu k
 Aktor: Klient
 Opis: Klient przegląda dostępne filmy w katalogu, filtrując je według gatunku, roku premiery, oceny i innych kryteriów.
 Scenariusz: Klient loguje się do systemu -> Wybiera opcję przeglądania katalogu -> Filtruje i sortuje filmy -> Przegląda szczegóły wybranych filmów.
-<br>
+
 - Wypożyczenie Filmu
 Aktor: Klient
 Opis: Klient wypożycza wybrany film.
 Scenariusz: Klient przegląda katalog filmów -> Wybiera film -> Sprawdza dostępność -> Wypożycza film -> System zapisuje wypożyczenie.
-<br>
+
 - Zwrot Filmu
 Aktor: Klient
 Opis: Klient zwraca wcześniej wypożyczony film.
 Scenariusz: Klient loguje się do systemu -> Wybiera opcję zwrotu filmu -> Potwierdza zwrot -> System aktualizuje status wypożyczenia.
-<br>
+
 - Dodanie Opinii o Filmie
 Aktor: Klient
 Opis: Klient dodaje opinię i ocenę dla filmu.
 Scenariusz: Klient loguje się do systemu -> Wybiera film -> Dodaje ocenę i komentarz -> System zapisuje opinię.
-<br>
+
 - Rejestracja Nowego Klienta
 Aktor: Klient
 Opis: Nowy użytkownik rejestruje się w systemie.
 Scenariusz: Nowy użytkownik wypełnia formularz rejestracyjny -> System tworzy nowy profil klienta.
-<br>
+
 - Logowanie Klienta
 Aktor: Klient
 Opis: Klient loguje się do systemu.
 Scenariusz: Klient wprowadza dane logowania -> System uwierzytelnia klienta -> Klient uzyskuje dostęp do swojego konta.
-<br>
+
 - Zarządzanie Filmami
 Aktor: Pracownik Wypożyczalni
 Opis: Pracownik dodaje, edytuje lub usuwa filmy z katalogu.
 Scenariusz: Pracownik loguje się do systemu -> Wybiera opcję zarządzania filmami -> Dodaje/edytuje/usunięcie film -> System aktualizuje bazę danych.
-<br>
+
 - Zarządzanie Klientami
 Aktor: Pracownik Wypożyczalni
 Opis: Pracownik zarządza informacjami o klientach.
 Scenariusz: Pracownik loguje się do systemu -> Wybiera opcję zarządzania klientami -> Dodaje/edytuje/usunięcie klientów -> System aktualizuje bazę danych.
-<br>
+
 - Przeglądanie Historii Wypożyczeń
 Aktorzy: Klient, Pracownik Wypożyczalni
 Opis: Klient lub pracownik przegląda historię wypożyczeń.
 Scenariusz: Klient/Pracownik loguje się do systemu -> Wybiera opcję przeglądania historii -> System wyświetla historię wypożyczeń.
-<br>
+
 - Rekomendacja Filmów
 Aktor: Klient
 Opis: System rekomenduje filmy na podstawie historii oglądania i preferencji klienta.
 Scenariusz: Klient loguje się do systemu -> Wybiera opcję rekomendacji -> System analizuje dane -> Wyświetla listę rekomendowanych filmów.
-<br>
+
 - Rezerwacja Filmu
 Aktor: Klient
 Opis: Klient rezerwuje film, który jest aktualnie niedostępny.
