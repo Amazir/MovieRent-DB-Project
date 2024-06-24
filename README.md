@@ -158,7 +158,7 @@ Opis: Zapewnia, że każda wartość client-id w tabeli rentals odpowiada istnie
 2. Klucz obcy: movie-id
 Referencja do: movies.movie-id
 Opis: Zapewnia, że każda wartość movie-id w tabeli rentals odpowiada istniejącemu movie-id w tabeli movies.
-<br>
+
 - Tabela: history
 1. Klucz obcy: client-id
 Referencja do: clients.client-id
@@ -167,7 +167,7 @@ Opis: Zapewnia, że każda wartość client-id w tabeli history odpowiada istnie
 2. Klucz obcy: movie-id
 Referencja do: movies.movie-id
 Opis: Zapewnia, że każda wartość movie-id w tabeli history odpowiada istniejącemu movie-id w tabeli movies.
-<br>
+
 - Tabela: opinions
 1. Klucz obcy: client-id
 Referencja do: clients.client-id
