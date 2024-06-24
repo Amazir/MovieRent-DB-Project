@@ -16,11 +16,11 @@ Baza danych będzie składała się z pięciu głównych tabel: Filmy, Klienci, 
 Poniżej znajduje się szczegółowy opis każdej z tabel.
 
 ##### TABELA: FILMY
-•	movie_id (int, PK): Unikalny identyfikator filmu.
-•	title (varchar(255)): Tytuł filmu.
-•	genre (varchar(50)): Gatunek filmu.
-•	release_date (date): Data premiery filmu.
-•	number_of_copies (int): Liczba kopii dostępnych w wypożyczalni.
+-	movie_id (int, PK): Unikalny identyfikator filmu.
+-	title (varchar(255)): Tytuł filmu.
+-	genre (varchar(50)): Gatunek filmu.
+-	release_date (date): Data premiery filmu.
+-	number_of_copies (int): Liczba kopii dostępnych w wypożyczalni.
 
 ```sql
 CREATE TABLE movies (
@@ -34,11 +34,11 @@ CREATE TABLE movies (
 ```
 
 ##### TABELA: KLIENCI
-•	client_id (int, PK): Unikalny identyfikator klienta.
-•	first_name (varchar(100)): Imię klienta.
-•	last_name (varchar(100)): Nazwisko klienta.
-•	email (varchar(255)): Adres e-mail klienta.
-•	phone_number (varchar(20)): Numer telefonu klienta.
+-	client_id (int, PK): Unikalny identyfikator klienta.
+-	first_name (varchar(100)): Imię klienta.
+-	last_name (varchar(100)): Nazwisko klienta.
+-	email (varchar(255)): Adres e-mail klienta.
+-	phone_number (varchar(20)): Numer telefonu klienta.
 
 ```sql
 CREATE TABLE clients (
@@ -52,11 +52,11 @@ CREATE TABLE clients (
 ```
 
 ##### TABELA: WYPOŻYCZENIA
-•	rental_id (int, PK): Unikalny identyfikator wypożyczenia.
-•	client_id (int, FK): Identyfikator klienta (klucz obcy, referencja do tabeli Klienci).
-•	movie_id (int, FK): Identyfikator filmu (klucz obcy, referencja do tabeli Filmy).
-•	rent_date (date): Data wypożyczenia.
-•	return_date (date): Data zwrotu.
+-	rental_id (int, PK): Unikalny identyfikator wypożyczenia.
+-	client_id (int, FK): Identyfikator klienta (klucz obcy, referencja do tabeli Klienci).
+-	movie_id (int, FK): Identyfikator filmu (klucz obcy, referencja do tabeli Filmy).
+-	rent_date (date): Data wypożyczenia.
+-	return_date (date): Data zwrotu.
 
 ```sql
 CREATE TABLE rentals (
@@ -81,11 +81,11 @@ ALTER TABLE rentals ADD CONSTRAINT rentals_movies
 ```
 
 ##### TABELA: HISTORIA
-•	history_id (int, PK): Unikalny identyfikator historii.
-•	client_id (int, FK): Identyfikator klienta (klucz obcy, referencja do tabeli Klienci).
-•	movie_id (int, FK): Identyfikator filmu (klucz obcy, referencja do tabeli Filmy).
-•	rent_date (date): Data wypożyczenia.
-•	return_date (date): Data zwrotu.
+-	history_id (int, PK): Unikalny identyfikator historii.
+-	client_id (int, FK): Identyfikator klienta (klucz obcy, referencja do tabeli Klienci).
+-	movie_id (int, FK): Identyfikator filmu (klucz obcy, referencja do tabeli Filmy).
+-	rent_date (date): Data wypożyczenia.
+-	return_date (date): Data zwrotu.
 
 ```sql
 CREATE TABLE history (
@@ -110,11 +110,11 @@ ALTER TABLE history ADD CONSTRAINT history_movies
 ```
 
 ##### TABELA: OPINIE
-•	opinion_id (int, PK): Unikalny identyfikator opinii.
-•	client_id (int, FK): Identyfikator klienta (klucz obcy, referencja do tabeli Klienci).
-•	movie_id (int, FK): Identyfikator filmu (klucz obcy, referencja do tabeli Filmy).
-•	rate (int): Ocena filmu (np. w skali od 1 do 10).
-•	comment (text): Komentarz użytkownika dotyczący filmu.
+-	opinion_id (int, PK): Unikalny identyfikator opinii.
+-	client_id (int, FK): Identyfikator klienta (klucz obcy, referencja do tabeli Klienci).
+-	movie_id (int, FK): Identyfikator filmu (klucz obcy, referencja do tabeli Filmy).
+-	rate (int): Ocena filmu (np. w skali od 1 do 10).
+-	comment (text): Komentarz użytkownika dotyczący filmu.
 
 ```sql
 CREATE TABLE opinions (
@@ -139,14 +139,14 @@ ALTER TABLE opinions ADD CONSTRAINT opinions_movies
 ```
 
 #### 4. RELACJE MIĘDZY TABELAMI
-•	Filmy i Klienci mają relacje z tabelą Wypożyczenia oraz Historia poprzez klucze obce movie_id i client_id.
-•	Filmy i Klienci są również powiązane z tabelą Opinie poprzez klucze obce movie_id i client_id.
-•	Tabela Wypożyczenia ma referencje do tabeli Historia w celu ewidencjonowania historii wypożyczeń.
+-	Filmy i Klienci mają relacje z tabelą Wypożyczenia oraz Historia poprzez klucze obce movie_id i client_id.
+-	Filmy i Klienci są również powiązane z tabelą Opinie poprzez klucze obce movie_id i client_id.
+-	Tabela Wypożyczenia ma referencje do tabeli Historia w celu ewidencjonowania historii wypożyczeń.
 
 #### 5. SYSTEM REKOMENDACJI
 System rekomendacji będzie analizował historię wypożyczeń oraz oceny filmów, aby sugerować klientom filmy, które mogą ich zainteresować. Możliwe podejścia do rekomendacji obejmują:
-•	Collaborative Filtering: Analiza podobieństw między użytkownikami na podstawie ich historii oglądania i ocen.
-•	Content-Based Filtering: Analiza cech filmów (gatunek, obsada) i preferencji użytkowników.
+-	Collaborative Filtering: Analiza podobieństw między użytkownikami na podstawie ich historii oglądania i ocen.
+-	Content-Based Filtering: Analiza cech filmów (gatunek, obsada) i preferencji użytkowników.
 
 #### 6. EWIDENCJA REZERWACJI
 System będzie obsługiwał rezerwacje filmów poprzez wprowadzenie mechanizmu kolejek oczekujących. Użytkownicy będą mogli rezerwować filmy, a system automatycznie powiadomi ich, gdy film będzie dostępny do wypożyczenia.
